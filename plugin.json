@@ -1,0 +1,11 @@
+{
+  "pluginmetadataversion": 2,
+  "name": "XNU Sysctl Hunter",
+  "type": ["helper"],
+  "api": ["python3"],
+  "description": "XNU Sysctl Hunter is a tool for analyzing Kexts that will automatically identify, type, and tag sysctl OIDs, as well as correct the prototypes of their OID handler functions. It contains a Binary Ninja plugin action, as well as a headless script for cli use.",
+  "platforms": ["Darwin", "Linux", "Windows"],
+  "version": "0.1.0",
+  "author": "actae0n",
+  "minimumbinaryninjaversion": 1200
+}
