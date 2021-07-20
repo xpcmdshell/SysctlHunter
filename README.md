@@ -1,6 +1,6 @@
 XNU Sysctl Hunter
 ====================
-XNU Sysctl Hunteris a tool for analyzing Kexts that will automatically identify, type, and tag sysctl OIDs, as well as correct the prototypes of their OID handler functions. It contains a Binary Ninja plugin action, as well as a headless script for batch processing.
+XNU Sysctl Hunter is a tool for analyzing Kexts that will automatically identify, type, and tag sysctl OIDs, as well as correct the prototypes of their OID handler functions. It contains a Binary Ninja plugin action, as well as a headless script for batch processing.
 
 # Screenshots
 OID structures are created, and their location is tagged for review later:
