@@ -219,6 +219,7 @@ class SysctlHunter:
         name_addr = int.from_bytes(oid.oid_name.value, "little")
         desc_addr = int.from_bytes(oid.oid_descr.value, "little")
         flags = int.from_bytes(oid.oid_kind.value, "little")
+        fmt_addr = int.from_bytes(oid.oid_fmt.value, "little")
 
         summary = {}
 
@@ -249,6 +250,11 @@ class SysctlHunter:
             desc = self.bv.get_ascii_string_at(name_addr, min_length=0)
             if desc:
                 summary["description"] = desc.value
+
+        if fmt_addr != 0:
+            fmt = self.bv.get_ascii_string_at(fmt_addr, min_length=0)
+            if fmt:
+                summary["fmt"] = fmt.value
 
         summary["path"] = self.get_oid_path(oid)
 
