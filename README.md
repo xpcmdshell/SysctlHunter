@@ -24,7 +24,8 @@ $ ./hunter.py /System/Library/Extensions/L2TP.kext
 {"flags": ["CTLFLAG_RD", "CTLFLAG_WR", "CTLFLAG_NOAUTO", "CTLFLAG_KERN", "CTLFLAG_OID2", "CTLTYPE_INT"], "type": "leaf", "name": "thread_outq_
 size", "description": "thread_outq_size", "path": "net.ppp.l2tp.thread_outq_size"}
 {"flags": ["CTLFLAG_RD", "CTLFLAG_WR", "CTLFLAG_OID2", "CTLTYPE_NODE"], "type": "container", "name": "l2tp", "description": "l2tp", "path": "n
-et.ppp.l2tp"}```
+et.ppp.l2tp"}
+```
 
 Suppress status lines with the `quiet` option:
 ```
@@ -35,7 +36,8 @@ $ ./hunter.py -q /System/Library/Extensions/L2TP.kext
 {"flags": ["CTLFLAG_RD", "CTLFLAG_WR", "CTLFLAG_NOAUTO", "CTLFLAG_KERN", "CTLFLAG_OID2", "CTLTYPE_INT"], "type": "leaf", "name": "thread_outq_
 size", "description": "thread_outq_size", "path": "net.ppp.l2tp.thread_outq_size"}
 {"flags": ["CTLFLAG_RD", "CTLFLAG_WR", "CTLFLAG_OID2", "CTLTYPE_NODE"], "type": "container", "name": "l2tp", "description": "l2tp", "path": "n
-et.ppp.l2tp"}```
+et.ppp.l2tp"}
+```
 
 Save the BNDB for more reversing later (OIDs are marked in the Tags section):
 ```
