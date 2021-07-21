@@ -203,11 +203,20 @@ class SysctlHunter:
 
         name_addr = int.from_bytes(oid.oid_name.value, "little")
         name = self.bv.get_ascii_string_at(name_addr)
-        if not name_addr:
+        if not name:
             return "<Unknown>"
+
         name = name.value
 
+        # Leading underscores
         sym = sym.lstrip("_")
+
+        # Handling cases where the oid struct is a member of a C++ class (sigh)
+        nspc_idx = sym.rfind("::")
+        if nspc_idx >= 0:
+            # Chop off the namespace portion
+            sym = sym[nspc_idx + 2 :]
+
         sym = sym.replace("sysctl__", "", 1)
         p = sym.split(name)[0]
         p = p.replace("_", ".", -1) + name
