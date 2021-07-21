@@ -202,7 +202,7 @@ class SysctlHunter:
         sym = sym.short_name
 
         name_addr = int.from_bytes(oid.oid_name.value, "little")
-        name = self.bv.get_ascii_string_at(name_addr)
+        name = self.bv.get_ascii_string_at(name_addr, min_length=1)
         if not name:
             return "<Unknown>"
 
@@ -251,17 +251,17 @@ class SysctlHunter:
                 summary["handler"] = demangled_name[0]
 
         if name_addr != 0:
-            name: StringReference = self.bv.get_ascii_string_at(name_addr, min_length=0)
+            name: StringReference = self.bv.get_ascii_string_at(name_addr, min_length=1)
             if name:
                 summary["name"] = name.value
 
         if desc_addr != 0:
-            desc = self.bv.get_ascii_string_at(name_addr, min_length=0)
+            desc = self.bv.get_ascii_string_at(name_addr, min_length=1)
             if desc:
                 summary["description"] = desc.value
 
         if fmt_addr != 0:
-            fmt = self.bv.get_ascii_string_at(fmt_addr, min_length=0)
+            fmt = self.bv.get_ascii_string_at(fmt_addr, min_length=1)
             if fmt:
                 summary["fmt"] = fmt.value
 
