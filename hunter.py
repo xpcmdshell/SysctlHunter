@@ -193,6 +193,26 @@ class SysctlHunter:
             addr, self.bv.tag_types["Sysctl OID"], "Sysctl OID", False
         )
 
+    # Try to infer the full OID path from debug symbols
+    def get_oid_path(self, oid: StructuredDataView):
+        sym = self.bv.get_symbol_at(oid._address)
+        # No symbol to work from, bye!
+        if not sym:
+            return "<Unknown>"
+        sym = sym.short_name
+
+        name_addr = int.from_bytes(oid.oid_name.value, "little")
+        name = self.bv.get_ascii_string_at(name_addr)
+        if not name_addr:
+            return "<Unknown>"
+        name = name.value
+
+        sym = sym.lstrip("_")
+        sym = sym.replace("sysctl__", "", 1)
+        p = sym.split(name)[0]
+        p = p.replace("_", ".", -1) + name
+        return p
+
     # Take the view of the OID and dump the interesting information as json
     def summarize_oid(self, oid: StructuredDataView):
         handler_addr = int.from_bytes(oid.oid_handler.value, "little")
@@ -229,6 +249,8 @@ class SysctlHunter:
             desc = self.bv.get_ascii_string_at(name_addr, min_length=0)
             if desc:
                 summary["description"] = desc.value
+
+        summary["path"] = self.get_oid_path(oid)
 
         print(json.dumps(summary))
 
