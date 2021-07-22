@@ -266,6 +266,7 @@ class SysctlHunter:
                 summary["fmt"] = fmt.value
 
         summary["path"] = self.get_oid_path(oid)
+        self.bv.set_comment_at(oid._address, summary["path"])
 
         print(json.dumps(summary))
 
